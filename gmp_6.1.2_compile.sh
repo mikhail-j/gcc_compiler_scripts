@@ -39,9 +39,11 @@ if test $FOUND_CURL_EXIT_CODE -eq 0; then
 		fi
 	else
 		echo "error: gpg could not be found!"
+		exit 1
 	fi
 else
 	echo "error: curl could not be found!"
+	exit 1
 fi
 
 case "Good signature" in
@@ -58,5 +60,6 @@ if test $GMP_TAR_VERIFIED == true; then
 	tar -xjf gmp-6.1.2.tar.bz2
 else
 	echo "error: gmp-6.1.2.tar.bz2 could not be verified!"
+	exit 1
 fi
 

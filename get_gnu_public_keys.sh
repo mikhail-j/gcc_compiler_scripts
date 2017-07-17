@@ -36,4 +36,5 @@ if test $FOUND_CURL_EXIT_CODE -eq 0; then
 	fi
 else
 	echo "error: curl could not be found!"
+	exit 1
 fi
