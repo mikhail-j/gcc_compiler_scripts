@@ -39,7 +39,7 @@ if test $found_curl_exit_code -eq 0; then
 	fi
 
 	if test $found_gpg_exit_code -eq 0; then
-		if test -f gmp-6.1.2.tar.bz2 && test -f gmp-6.1.2.tar.bz2
+		if test -f gmp-6.1.2.tar.bz2 && test -f gmp-6.1.2.tar.bz2; then
 			gpg_verify_output=$(gpg --status-fd 1 --verify gmp-6.1.2.tar.bz2.sig)
 		fi
 	else
