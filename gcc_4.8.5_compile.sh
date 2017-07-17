@@ -33,8 +33,7 @@ case $1 in
 			*"VALIDSIG"*)
 				# Check for fingerprint from https://gcc.gnu.org/mirrors.html
 				case $1 in
-					*""*)
-					#*"343C2FF0FBEE5EC2EDBEF399F3599FF828C67298"*)
+					*"7F74F97C103468EE5D750B583AB00996FC26A641"*)
 						gcc_tar_verified=true
 					;;
 				esac
@@ -58,12 +57,12 @@ fi
 # and its respective signature.
 if ! $gcc_tar_verified; then
 	if test $found_curl_exit_code -eq 0; then
-		curl -O https://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.bz2
+		curl -O http://mirrors.kernel.org/gnu/gcc/gcc-4.8.5/gcc-4.8.5.tar.bz2
 		if test $? -ne 0; then
 			exit 1
 		fi
 	
-		curl -O https://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.bz2.sig
+		curl -O http://mirrors.kernel.org/gnu/gcc/gcc-4.8.5/gcc-4.8.5.tar.bz2.sig
 		if test $? -ne 0; then
 			exit 1
 		fi
