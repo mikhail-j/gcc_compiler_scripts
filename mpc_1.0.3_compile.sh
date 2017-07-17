@@ -1,5 +1,5 @@
 #! /bin/sh
-# Compile and install MPFR 3.1.5.
+# Compile and install MPC 1.0.3.
 #
 # Copyright (C) 2017 Qijia (Michael) Jin
 #
@@ -23,9 +23,9 @@ found_curl_exit_code=$?
 found_gpg=$(command -v gpg >/dev/null 2>&1)
 found_gpg_exit_code=$?
 
-mpfr_tar_verified=false
+mpc_tar_verified=false
 
-verify_mpfr_archive()
+verify_mpc_archive()
 {
 case $1 in
 	*"GOODSIG"*)
@@ -33,8 +33,8 @@ case $1 in
 			*"VALIDSIG"*)
 				# Check for fingerprint from https://gmplib.org/
 				case $1 in
-					*"07F3DBBECC1A39605078094D980C197698C3739D"*)
-						mpfr_tar_verified=true
+					*"AD17A21EF8AED8F1CC02DBD9F7D5C9BF765C61E3"*)
+						mpc_tar_verified=true
 					;;
 				esac
 			;;
@@ -45,7 +45,7 @@ esac
 
 # Get public key from pgp.mit.edu.
 if test $found_gpg_exit_code -eq 0; then
-	gpg --keyserver pgp.mit.edu --recv-keys 980C197698C3739D
+	gpg --keyserver pgp.mit.edu --recv-keys 0xF7D5C9BF765C61E3
 	if test $? -ne 0; then
 		exit $?
 	fi
@@ -56,8 +56,8 @@ fi
 
 # Verify files immediately if they already exist.
 if test $found_gpg_exit_code -eq 0; then
-	if test -f mpfr-3.1.5.tar.bz2 && test -f mpfr-3.1.5.tar.bz2.asc; then
-		verify_mpfr_archive "$(gpg --status-fd 1 --verify mpfr-3.1.5.tar.bz2.asc)"
+	if test -f mpc-1.0.3.tar.gz && test -f mpc-1.0.3.tar.gz.sig; then
+		verify_mpc_archive "$(gpg --status-fd 1 --verify mpc-1.0.3.tar.gz.sig)"
 	fi
 else
 	echo "error: gpg could not be found!"
@@ -66,21 +66,21 @@ fi
 
 # The following runs when we need a new download of both the archive
 # and its respective signature.
-if ! $mpfr_tar_verified; then
+if ! $mpc_tar_verified; then
 	if test $found_curl_exit_code -eq 0; then
-		curl -O http://www.mpfr.org/mpfr-current/mpfr-3.1.5.tar.bz2
+		curl -O ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
 		if test $? -ne 0; then
 			exit 1
 		fi
 	
-		curl -O http://www.mpfr.org/mpfr-current/mpfr-3.1.5.tar.bz2.asc
+		curl -O ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz.sig
 		if test $? -ne 0; then
 			exit 1
 		fi
 	
 		if test $found_gpg_exit_code -eq 0; then
-			if test -f mpfr-3.1.5.tar.bz2 && test -f mpfr-3.1.5.tar.bz2.asc; then
-				verify_mpfr_archive "$(gpg --status-fd 1 --verify mpfr-3.1.5.tar.bz2.asc)"
+			if test -f mpc-1.0.3.tar.gz && test -f mpc-1.0.3.tar.gz.sig; then
+				verify_mpc_archive "$(gpg --status-fd 1 --verify mpc-1.0.3.tar.gz.sig)"
 			fi
 		else
 			echo "error: gpg could not be found!"
@@ -92,30 +92,30 @@ if ! $mpfr_tar_verified; then
 	fi
 fi
 
-# Remove directory from previous compilation attempt (if mpfr-3.1.5 already exists).
-if test -d mpfr-3.1.5; then
-	rm -rf mpfr-3.1.5
+# Remove directory from previous compilation attempt (if mpc-1.0.3 already exists).
+if test -d mpc-1.0.3; then
+	rm -rf mpc-1.0.3
 fi
 
-if $mpfr_tar_verified; then
-	tar -xjf mpfr-3.1.5.tar.bz2
+if $mpc_tar_verified; then
+	tar -xjf mpc-1.0.3.tar.gz
 	if test $? -ne 0; then
 		exit $?
 	fi 
 else
-	echo "error: mpfr-3.1.5.tar.bz2 could not be verified!"
+	echo "error: mpc-1.0.3.tar.gz could not be verified!"
 	exit 1
 fi
 
-if test -d mpfr-3.1.5; then
-	cd mpfr-3.1.5
+if test -d mpc-1.0.3; then
+	cd mpc-1.0.3
 else
-	echo "error: The mpfr-3.1.5 folder does not exist!"
+	echo "error: The mpc-1.0.3 folder does not exist!"
 	exit 1
 fi
 
 if test -f configure; then
-	./configure --enable-static --enable-shared --prefix=/usr/local --with-gmp=/usr/local
+	./configure --enable-static --enable-shared --prefix=/usr/local --with-gmp=/usr/local --with-mpfr=/usr/local
 	if test $? -ne 0; then
 		exit $?
 	fi
