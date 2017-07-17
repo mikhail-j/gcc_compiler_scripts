@@ -1,5 +1,5 @@
 #! /bin/sh
-# Compile and install MPC 1.0.3.
+# Compile and install isl 0.14.1.
 #
 # Copyright (C) 2017 Qijia (Michael) Jin
 #
