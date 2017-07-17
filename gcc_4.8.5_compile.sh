@@ -25,6 +25,18 @@ found_gpg_exit_code=$?
 
 gcc_tar_verified=false
 
+# Set LD_LIBRARY_PATH
+case $LD_LIBRARY_PATH in
+	'')
+		export LD_LIBRARY_PATH=/usr/local/lib
+	;;
+	*"/usr/local/lib"*)
+	;;
+	*)
+		export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+	;;
+esac
+
 verify_gcc_archive()
 {
 case $1 in
