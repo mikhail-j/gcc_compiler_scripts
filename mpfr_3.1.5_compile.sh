@@ -31,7 +31,7 @@ case $1 in
 	*"GOODSIG"*)
 		case $1 in
 			*"VALIDSIG"*)
-				# Check for fingerprint from https://gmplib.org/
+				# Check for fingerprint from http://www.mpfr.org/mpfr-current/#download
 				case $1 in
 					*"07F3DBBECC1A39605078094D980C197698C3739D"*)
 						mpfr_tar_verified=true
