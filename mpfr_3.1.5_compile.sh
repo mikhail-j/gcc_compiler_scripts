@@ -51,6 +51,7 @@ if test $found_gpg_exit_code -eq 0; then
 	fi
 else
 	echo "error: gpg could not be found!"
+	exit 1
 fi
 
 # Verify files immediately if they already exist.
@@ -97,7 +98,7 @@ if test -d mpfr-3.1.5; then
 fi
 
 if $mpfr_tar_verified; then
-	tar -xjf gmp-6.1.2.tar.bz2
+	tar -xjf mpfr-3.1.5.tar.bz2
 	if test $? -ne 0; then
 		exit $?
 	fi 
@@ -114,7 +115,7 @@ else
 fi
 
 if test -f configure; then
-	./configure --enable-shared --enable-static --prefix=/usr/local
+	./configure --enable-static --enable-shared --prefix=/usr/local --with-gmp=/usr/local
 	if test $? -ne 0; then
 		exit $?
 	fi
