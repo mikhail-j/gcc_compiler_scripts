@@ -31,9 +31,9 @@ case $1 in
 	*"GOODSIG"*)
 		case $1 in
 			*"VALIDSIG"*)
-				# Check for fingerprint from https://gmplib.org/
+				# Check for fingerprint from https://gm
 				case $1 in
-					*"44A088E295C3A722C450590EC9EF76DEB74EE762"*)
+					*"1F967B15DEB2349CACDF3D71D9204CB5BFBF0221"*)
 						autogen_tar_verified=true
 					;;
 				esac
