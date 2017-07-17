@@ -34,7 +34,7 @@ if test ! -f isl-0.14.tar.gz; then
 	fi
 fi
 
-# Remove directory from previous compilation attempt (if isl-0.14.1 already exists).
+# Remove directory from previous compilation attempt (if isl-0.14 already exists).
 if test -d isl-0.14; then
 	rm -rf isl-0.14
 fi
