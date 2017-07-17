@@ -1,5 +1,5 @@
 #! /bin/sh
-# Compile and install AutoGen 5.18.12.
+# Compile and install AutoGen 5.18.7.
 #
 # Copyright (C) 2017 Qijia (Michael) Jin
 #
@@ -45,8 +45,8 @@ esac
 
 # Verify files immediately if they already exist.
 if test $found_gpg_exit_code -eq 0; then
-	if test -f autogen-5.18.12.tar.gz && test -f autogen-5.18.12.tar.gz.sig; then
-		verify_autogen_archive "$(gpg --status-fd 1 --verify autogen-5.18.12.tar.gz.sig)"
+	if test -f autogen-5.18.7.tar.gz && test -f autogen-5.18.7.tar.gz.sig; then
+		verify_autogen_archive "$(gpg --status-fd 1 --verify autogen-5.18.7.tar.gz.sig)"
 	fi
 else
 	echo "error: gpg could not be found!"
@@ -57,19 +57,19 @@ fi
 # and its respective signature.
 if ! $autogen_tar_verified; then
 	if test $found_curl_exit_code -eq 0; then
-		curl -O https://ftp.gnu.org/gnu/autogen/rel5.18.12/autogen-5.18.12.tar.gz
+		curl -O https://ftp.gnu.org/gnu/autogen/autogen-5.18.7.tar.gz
 		if test $? -ne 0; then
 			exit 1
 		fi
 	
-		curl -O https://ftp.gnu.org/gnu/autogen/rel5.18.12/autogen-5.18.12.tar.gz.sig
+		curl -O https://ftp.gnu.org/gnu/autogen/autogen-5.18.7.tar.gz.sig
 		if test $? -ne 0; then
 			exit 1
 		fi
 	
 		if test $found_gpg_exit_code -eq 0; then
-			if test -f autogen-5.18.12.tar.gz && test -f autogen-5.18.12.tar.gz.sig; then
-				verify_autogen_archive "$(gpg --status-fd 1 --verify autogen-5.18.12.tar.gz.sig)"
+			if test -f autogen-5.18.7.tar.gz && test -f autogen-5.18.7.tar.gz.sig; then
+				verify_autogen_archive "$(gpg --status-fd 1 --verify autogen-5.18.7.tar.gz.sig)"
 			fi
 		else
 			echo "error: gpg could not be found!"
@@ -81,25 +81,25 @@ if ! $autogen_tar_verified; then
 	fi
 fi
 
-# Remove directory from previous compilation attempt (if autogen-5.18.12 already exists).
-if test -d autogen-5.18.12; then
-	rm -rf autogen-5.18.12
+# Remove directory from previous compilation attempt (if autogen-5.18.7 already exists).
+if test -d autogen-5.18.7; then
+	rm -rf autogen-5.18.7
 fi
 
 if $autogen_tar_verified; then
-	tar -xzf autogen-5.18.12.tar.gz
+	tar -xzf autogen-5.18.7.tar.gz
 	if test $? -ne 0; then
 		exit $?
 	fi 
 else
-	echo "error: autogen-5.18.12.tar.gz could not be verified!"
+	echo "error: autogen-5.18.7.tar.gz could not be verified!"
 	exit 1
 fi
 
-if test -d autogen-5.18.12; then
-	cd autogen-5.18.12
+if test -d autogen-5.18.7; then
+	cd autogen-5.18.7
 else
-	echo "error: The autogen-5.18.12 folder does not exist!"
+	echo "error: The autogen-5.18.7 folder does not exist!"
 	exit 1
 fi
 
