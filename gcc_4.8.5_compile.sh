@@ -1,6 +1,9 @@
 #! /bin/sh
 # Compile and install GCC 4.8.5.
 #
+# Compiling on CentOS requires the 'glibc-devel.i686' package
+# to fix dependency on 'gnu/stubs-32.h'.
+#
 # Copyright (C) 2017 Qijia (Michael) Jin
 #
 # This program is free software; you can redistribute it and/or
