@@ -98,7 +98,7 @@ if test -d mpc-1.0.3; then
 fi
 
 if $mpc_tar_verified; then
-	tar -xjf mpc-1.0.3.tar.gz
+	tar -xzf mpc-1.0.3.tar.gz
 	if test $? -ne 0; then
 		exit $?
 	fi 
