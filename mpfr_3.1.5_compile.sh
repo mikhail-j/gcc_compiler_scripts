@@ -1,5 +1,5 @@
 #! /bin/sh
-# Compile and install GMP v6.1.2.
+# Compile and install MPFR 3.1.5.
 #
 # Copyright (C) 2017 Qijia (Michael) Jin
 #
@@ -23,9 +23,9 @@ found_curl_exit_code=$?
 found_gpg=$(command -v gpg >/dev/null 2>&1)
 found_gpg_exit_code=$?
 
-gmp_tar_verified=false
+mpfr_tar_verified=false
 
-verify_gmp_archive()
+verify_mpfr_archive()
 {
 case $1 in
 	*"GOODSIG"*)
@@ -33,8 +33,8 @@ case $1 in
 			*"VALIDSIG"*)
 				# Check for fingerprint from https://gmplib.org/
 				case $1 in
-					*"343C2FF0FBEE5EC2EDBEF399F3599FF828C67298"*)
-						gmp_tar_verified=true
+					*"07F3DBBECC1A39605078094D980C197698C3739D"*)
+						mpfr_tar_verified=true
 					;;
 				esac
 			;;
@@ -43,10 +43,20 @@ case $1 in
 esac
 }
 
+# Get public key from pgp.mit.edu.
+if test $found_gpg_exit_code -eq 0; then
+	gpg --keyserver pgp.mit.edu --recv-keys 980C197698C3739D
+	if test $? -ne 0; then
+		exit $?
+	fi
+else
+	echo "error: gpg could not be found!"
+fi
+
 # Verify files immediately if they already exist.
 if test $found_gpg_exit_code -eq 0; then
-	if test -f gmp-6.1.2.tar.bz2 && test -f gmp-6.1.2.tar.bz2.sig; then
-		verify_gmp_archive "$(gpg --status-fd 1 --verify gmp-6.1.2.tar.bz2.sig)"
+	if test -f mpfr-3.1.5.tar.bz2 && test -f mpfr-3.1.5.tar.bz2.asc; then
+		verify_mpfr_archive "$(gpg --status-fd 1 --verify mpfr-3.1.5.tar.bz2.asc)"
 	fi
 else
 	echo "error: gpg could not be found!"
@@ -55,21 +65,21 @@ fi
 
 # The following runs when we need a new download of both the archive
 # and its respective signature.
-if ! $gmp_tar_verified; then
+if ! $mpfr_tar_verified; then
 	if test $found_curl_exit_code -eq 0; then
-		curl -O https://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.bz2
+		curl -O http://www.mpfr.org/mpfr-current/mpfr-3.1.5.tar.bz2
 		if test $? -ne 0; then
 			exit 1
 		fi
 	
-		curl -O https://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.bz2.sig
+		curl -O http://www.mpfr.org/mpfr-current/mpfr-3.1.5.tar.bz2.asc
 		if test $? -ne 0; then
 			exit 1
 		fi
 	
 		if test $found_gpg_exit_code -eq 0; then
-			if test -f gmp-6.1.2.tar.bz2 && test -f gmp-6.1.2.tar.bz2.sig; then
-				verify_gmp_archive "$(gpg --status-fd 1 --verify gmp-6.1.2.tar.bz2.sig)"
+			if test -f mpfr-3.1.5.tar.bz2 && test -f mpfr-3.1.5.tar.bz2.asc; then
+				verify_mpfr_archive "$(gpg --status-fd 1 --verify mpfr-3.1.5.tar.bz2.asc)"
 			fi
 		else
 			echo "error: gpg could not be found!"
@@ -82,24 +92,24 @@ if ! $gmp_tar_verified; then
 fi
 
 # Remove directory from previous compilation attempt (if gmp-6.1.2 already exists).
-if test -d gmp-6.1.2; then
-	rm -rf gmp-6.1.2
+if test -d mpfr-3.1.5; then
+	rm -rf mpfr-3.1.5
 fi
 
-if $gmp_tar_verified; then
+if $mpfr_tar_verified; then
 	tar -xjf gmp-6.1.2.tar.bz2
 	if test $? -ne 0; then
 		exit $?
 	fi 
 else
-	echo "error: gmp-6.1.2.tar.bz2 could not be verified!"
+	echo "error: mpfr-3.1.5.tar.bz2 could not be verified!"
 	exit 1
 fi
 
-if test -d gmp-6.1.2; then
-	cd gmp-6.1.2
+if test -d mpfr-3.1.5; then
+	cd mpfr-3.1.5 
 else
-	echo "error: The gmp-6.1.2 folder does not exist!"
+	echo "error: The mpfr-3.1.5 folder does not exist!"
 	exit 1
 fi
 
