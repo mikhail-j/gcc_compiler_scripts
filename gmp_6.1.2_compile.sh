@@ -46,7 +46,7 @@ esac
 # Verify files immediately if they already exist.
 if test $found_gpg_exit_code -eq 0; then
 	if test -f gmp-6.1.2.tar.bz2 && test -f gmp-6.1.2.tar.bz2; then
-		verify_archive $(gpg --status-fd 1 --verify gmp-6.1.2.tar.bz2.sig)
+		verify_archive "$(gpg --status-fd 1 --verify gmp-6.1.2.tar.bz2.sig)"
 	fi
 else
 	echo "error: gpg could not be found!"
@@ -69,7 +69,7 @@ if ! $gmp_tar_verified; then
 	
 		if test $found_gpg_exit_code -eq 0; then
 			if test -f gmp-6.1.2.tar.bz2 && test -f gmp-6.1.2.tar.bz2; then
-				verify_archive $(gpg --status-fd 1 --verify gmp-6.1.2.tar.bz2.sig)
+				verify_archive "$(gpg --status-fd 1 --verify gmp-6.1.2.tar.bz2.sig)"
 			fi
 		else
 			echo "error: gpg could not be found!"
