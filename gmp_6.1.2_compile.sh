@@ -51,14 +51,14 @@ else
 	exit 1
 fi
 
-case "GOODSIG" in
-	$gpg_verify_output)
-		case "VALIDSIG" in
-			$gpg_verify_output)
+case $gpg_verify_output in
+	*"GOODSIG"*)
+		case $gpg_verify_output in
+			*"VALIDSIG"*)
 				# Check for fingerprint from https://gmplib.org/
-				case "343C2FF0FBEE5EC2EDBEF399F3599FF828C67298" in
-					$gpg_verify_output)
-					gmp_tar_verified=true
+				case $gpg_verify_output in
+					*"343C2FF0FBEE5EC2EDBEF399F3599FF828C67298"*)
+						gmp_tar_verified=true
 					;;
 				esac
 			;;
