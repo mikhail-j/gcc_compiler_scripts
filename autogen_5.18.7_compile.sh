@@ -25,6 +25,13 @@ found_gpg_exit_code=$?
 
 autogen_tar_verified=false
 
+# AutoGen checks /usr/lib/pkgconfig rather than /usr/local/lib/pkgconfig
+if test -s /usr/local/bin/guile; then
+	if test -s /usr/local/lib/pkgconfig/guile.pc; then
+		cp /usr/local/lib/pkgconfig/guile.pc /usr/lib/pkgconfig/
+	fi
+fi
+
 verify_autogen_archive()
 {
 case $1 in
