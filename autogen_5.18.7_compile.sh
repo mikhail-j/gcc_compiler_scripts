@@ -25,11 +25,32 @@ found_gpg_exit_code=$?
 
 autogen_tar_verified=false
 
+found_guile=$(command -v guile >/dev/null 2>&1)
+found_guile_exit_code=$?
+guile_version=
+
+# Get guile version for pkgconfig .pc file.
+if test $found_guile_exit_code -eq 0; then
+        guile_version_query=$(guile --version | grep "(GNU Guile)" | awk '{print $4}')
+        case $guile_version_query in
+                "2.0"*)
+                        guile_version="2.0"
+                ;;
+                "1.8"*)
+                        guile_version="1.8"
+                ;;
+        esac
+fi
+
 # AutoGen checks /usr/lib/pkgconfig rather than /usr/local/lib/pkgconfig
 if test -s /usr/local/bin/guile; then
-	if test -s /usr/local/lib/pkgconfig/guile.pc; then
-		cp /usr/local/lib/pkgconfig/guile.pc /usr/lib/pkgconfig/
-	fi
+        if test -s /usr/local/lib/pkgconfig/guile-${guile_version}.pc; then
+                if test -d /usr/lib/pkgconfig; then
+                        sudo cp /usr/local/lib/pkgconfig/guile-${guile_version}.pc /usr/lib/pkgconfig/
+                elif test -d /usr/lib64/pkgconfig; then
+                        sudo cp /usr/local/lib/pkgconfig/guile-${guile_version}.pc /usr/lib64/pkgconfig/
+                fi
+        fi
 fi
 
 verify_autogen_archive()
