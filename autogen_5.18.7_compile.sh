@@ -44,6 +44,7 @@ fi
 
 # AutoGen checks /usr/lib/pkgconfig rather than /usr/local/lib/pkgconfig
 if test -s /usr/local/bin/guile; then
+	if test -s /usr/local/lib/pkgconfig/guile-${guile_version}.pc; then
         if test -d /usr/lib/pkgconfig; then
 			if ! test -s /usr/lib/pkgconfig/guile-${guile_version}.pc; then
 				sudo cp /usr/local/lib/pkgconfig/guile-${guile_version}.pc /usr/lib/pkgconfig/
@@ -53,6 +54,7 @@ if test -s /usr/local/bin/guile; then
 				sudo cp /usr/local/lib/pkgconfig/guile-${guile_version}.pc /usr/lib64/pkgconfig/
 			fi
 		fi
+	fi
 fi
 
 verify_autogen_archive()
