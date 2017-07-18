@@ -1,5 +1,5 @@
 #! /bin/sh
-# Compile and install GNU libtool 2.4.6.
+# Compile and install GNU libtool 2.4.4.
 #
 # Copyright (C) 2017 Qijia (Michael) Jin
 #
@@ -44,8 +44,8 @@ esac
 
 # Verify files immediately if they already exist.
 if test $found_gpg_exit_code -eq 0; then
-	if test -f libtool-2.4.6.tar.gz && test -f libtool-2.4.6.tar.gz.sig; then
-		verify_libtool_archive "$(gpg --status-fd 1 --verify libtool-2.4.6.tar.gz.sig)"
+	if test -f libtool-2.4.4.tar.gz && test -f libtool-2.4.4.tar.gz.sig; then
+		verify_libtool_archive "$(gpg --status-fd 1 --verify libtool-2.4.4.tar.gz.sig)"
 	fi
 else
 	echo "error: gpg could not be found!"
@@ -56,19 +56,19 @@ fi
 # and its respective signature.
 if ! $libtool_tar_verified; then
 	if test $found_curl_exit_code -eq 0; then
-		curl -O ftp://ftp.gnu.org/gnu/libtool/libtool-2.4.6.tar.gz
+		curl -O ftp://ftp.gnu.org/gnu/libtool/libtool-2.4.4.tar.gz
 		if test $? -ne 0; then
 			exit 1
 		fi
 	
-		curl -O ftp://ftp.gnu.org/gnu/libtool/libtool-2.4.6.tar.gz.sig
+		curl -O ftp://ftp.gnu.org/gnu/libtool/libtool-2.4.4.tar.gz.sig
 		if test $? -ne 0; then
 			exit 1
 		fi
 	
 		if test $found_gpg_exit_code -eq 0; then
-			if test -f libtool-2.4.6.tar.gz && test -f libtool-2.4.6.tar.gz.sig; then
-				verify_libtool_archive "$(gpg --status-fd 1 --verify libtool-2.4.6.tar.gz.sig)"
+			if test -f libtool-2.4.4.tar.gz && test -f libtool-2.4.4.tar.gz.sig; then
+				verify_libtool_archive "$(gpg --status-fd 1 --verify libtool-2.4.4.tar.gz.sig)"
 			fi
 		else
 			echo "error: gpg could not be found!"
@@ -80,25 +80,25 @@ if ! $libtool_tar_verified; then
 	fi
 fi
 
-# Remove directory from previous compilation attempt (if libtool-2.4.6 already exists).
-if test -d libtool-2.4.6; then
-	rm -rf libtool-2.4.6
+# Remove directory from previous compilation attempt (if libtool-2.4.4 already exists).
+if test -d libtool-2.4.4; then
+	rm -rf libtool-2.4.4
 fi
 
 if $libtool_tar_verified; then
-	tar -xzf libtool-2.4.6.tar.gz
+	tar -xzf libtool-2.4.4.tar.gz
 	if test $? -ne 0; then
 		exit $?
 	fi 
 else
-	echo "error: libtool-2.4.6.tar.gz could not be verified!"
+	echo "error: libtool-2.4.4.tar.gz could not be verified!"
 	exit 1
 fi
 
-if test -d libtool-2.4.6; then
-	cd libtool-2.4.6
+if test -d libtool-2.4.4; then
+	cd libtool-2.4.4
 else
-	echo "error: The libtool-2.4.6 folder does not exist!"
+	echo "error: The libtool-2.4.4 folder does not exist!"
 	exit 1
 fi
 
