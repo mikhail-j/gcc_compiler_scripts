@@ -129,7 +129,7 @@ case $1 in
 esac
 }
 
-testsuite_error_exception "$(make check)"
+testsuite_error_exception "$(make check 2>&1)"
 if test $? -ne 0; then
 	exit $?
 fi
