@@ -96,8 +96,8 @@ else
 	exit 1
 fi
 
-if test -d gmp-6.1.2; then
-	cd gmp-6.1.2
+if test -d guile-2.0.13; then
+	cd guile-2.0.13
 else
 	echo "error: The guile-2.0.13 folder does not exist!"
 	exit 1
