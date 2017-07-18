@@ -156,3 +156,8 @@ if test $? -ne 0; then
 fi
 
 sudo make altinstall
+
+# Rebuild ldconfig cache
+sudo ldconfig
+
+
