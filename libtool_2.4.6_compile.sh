@@ -33,7 +33,7 @@ case $1 in
 			*"VALIDSIG"*)
 				# Check for fingerprint from http://people.bordeaux.inria.fr/lcourtes/
 				case $1 in
-					*"3CE464558A84FDC69DB40CFB090B11993D9AEBB5"*)
+					*"CFE2BE707B538E8B26757D84151308092983D606"*)
 						libtool_tar_verified=true
 					;;
 				esac
