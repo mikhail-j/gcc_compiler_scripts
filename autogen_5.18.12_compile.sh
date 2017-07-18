@@ -31,7 +31,6 @@ case $1 in
 	*"GOODSIG"*)
 		case $1 in
 			*"VALIDSIG"*)
-				# Check for fingerprint from https://gmplib.org/
 				case $1 in
 					*"44A088E295C3A722C450590EC9EF76DEB74EE762"*)
 						autogen_tar_verified=true

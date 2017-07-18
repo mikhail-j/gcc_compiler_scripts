@@ -31,10 +31,9 @@ case $1 in
 	*"GOODSIG"*)
 		case $1 in
 			*"VALIDSIG"*)
-				# Check for fingerprint from https://gmplib.org/
+				# Check for fingerprint from http://people.bordeaux.inria.fr/lcourtes/
 				case $1 in
-					#*"343C2FF0FBEE5EC2EDBEF399F3599FF828C67298"*)
-					*""*)
+					*"3CE464558A84FDC69DB40CFB090B11993D9AEBB5"*)
 						guile_tar_verified=true
 					;;
 				esac

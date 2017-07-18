@@ -31,7 +31,6 @@ case $1 in
 	*"GOODSIG"*)
 		case $1 in
 			*"VALIDSIG"*)
-				# Check for fingerprint from https://gm
 				case $1 in
 					*"1F967B15DEB2349CACDF3D71D9204CB5BFBF0221"*)
 						autogen_tar_verified=true
