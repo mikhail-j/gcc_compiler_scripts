@@ -104,7 +104,7 @@ else
 fi
 
 if test -f configure; then
-	./configure --enable-shared --enable-static --prefix=/usr
+	./configure --enable-shared --enable-static --prefix=/usr/local
 	if test $? -ne 0; then
 		exit $?
 	fi

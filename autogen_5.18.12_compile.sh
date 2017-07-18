@@ -23,6 +23,13 @@ found_curl_exit_code=$?
 found_gpg=$(command -v gpg >/dev/null 2>&1)
 found_gpg_exit_code=$?
 
+# AutoGen checks /usr/lib/pkgconfig rather than /usr/local/lib/pkgconfig
+if test -s /usr/local/bin/guile; then
+	if test -s /usr/local/lib/pkgconfig/guile.pc; then
+		cp /usr/local/lib/pkgconfig/guile.pc /usr/lib/pkgconfig/
+	fi
+fi
+
 autogen_tar_verified=false
 
 verify_autogen_archive()
