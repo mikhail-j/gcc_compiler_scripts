@@ -46,9 +46,13 @@ fi
 if test -s /usr/local/bin/guile; then
 	if test -s /usr/local/lib/pkgconfig/guile-${guile_version}.pc; then
 		if test -d /usr/lib/pkgconfig; then
-			sudo cp /usr/local/lib/pkgconfig/guile-${guile_version}.pc /usr/lib/pkgconfig/
+			if ! test -s /usr/lib/pkgconfig/guile-${guile_version}.pc; then
+				sudo cp /usr/local/lib/pkgconfig/guile-${guile_version}.pc /usr/lib/pkgconfig/
+			fi
 		elif test -d /usr/lib64/pkgconfig; then
-			sudo cp /usr/local/lib/pkgconfig/guile-${guile_version}.pc /usr/lib64/pkgconfig/
+			if ! test -s /usr/lib64/pkgconfig/guile-${guile_version}.pc; then
+				sudo cp /usr/local/lib/pkgconfig/guile-${guile_version}.pc /usr/lib64/pkgconfig/
+			fi
 		fi
 	fi
 fi
