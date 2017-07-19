@@ -104,7 +104,7 @@ else
 	exit 1
 fi
 
-./bootstrap --prefix=/usr
+./bootstrap --prefix=/usr/local
 if test $? -ne 0; then
 	exit $?
 fi
