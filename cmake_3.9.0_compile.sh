@@ -109,7 +109,7 @@ if test $? -ne 0; then
 	exit $?
 fi
 
-make
+make -j 8
 if test $? -ne 0; then
 	exit $?
 fi
