@@ -139,3 +139,5 @@ if test $? -ne 0; then
 fi
 
 sudo make install
+
+cd ../
