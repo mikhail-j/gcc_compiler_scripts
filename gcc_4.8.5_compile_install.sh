@@ -20,6 +20,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+# Add /usr/local/lib to /etc/ld.conf.so.d/gcc-x86_64.conf
+if test ! -s /etc/ld.so.conf.d/gcc-x86_64.conf; then
+	sudo echo "/usr/local/lib" > /etc/ld.so.conf.d/gcc-x86_64.conf
+fi
+
 # Get GNU project public keys.
 sh ./get_gnu_public_keys.sh
 if test $? -ne 0; then

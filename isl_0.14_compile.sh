@@ -75,4 +75,6 @@ fi
 
 sudo make install
 
+sudo ldconfig
+
 cd ../
