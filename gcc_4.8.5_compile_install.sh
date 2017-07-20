@@ -67,10 +67,26 @@ if test $? -ne 0; then
 	exit $?
 fi
 
+# Check if guile is installed.
+check_guile=$(command -v guile >/dev/null 2>&1)
+if test $? -ne 0; then
+	check_guile_exit_code=$?
+	echo "error: guile could not be found!"
+	exit $check_guile_exit_code
+fi
+
 # Build AutoGen 5.18.12 and install.
 sh ./autogen_5.18.12_compile.sh
 if test $? -ne 0; then
 	exit $?
+fi
+
+# Check if autogen is installed.
+check_autogen=$(command -v autogen >/dev/null 2>&1)
+if test $? -ne 0; then
+	check_autogen_exit_code=$?
+	echo "error: autogen could not be found!"
+	exit $check_autogen_exit_code
 fi
 
 # Build GCC 4.8.5 and install.

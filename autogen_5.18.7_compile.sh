@@ -155,5 +155,8 @@ if test $? -ne 0; then
 fi
 
 sudo make install
+if test $? -ne 0; then
+        exit $?
+fi
 
 cd ../
