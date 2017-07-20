@@ -33,6 +33,7 @@ glibc-devel-32bit (64-bit)
 ~~~~
 
 * libunistring and libunistring-devel (for GNU Guile)
+* libffi-devel (for GNU Guile)
 
 Assuming that your operating system's libraries are inadequate for compiling GCC 4.8.5, the following libraries would be installed in this order:
 
