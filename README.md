@@ -5,7 +5,7 @@ A collection of shell scripts to compile GCC and the required libraries and some
 Building GCC 4.8.5
 ------------------
 
-The shell scripts currently require curl (to download archives) and gpg (to verify archives when possible).
+The shell scripts currently require curl (to download archives) and gpg (to verify archives when possible). In addition, 'glibc-devel.i686' (Centos/Red Hat yum package) or 'libc6-dev-i386' (Ubuntu package) or 'glibc-devel-32bit' (SUSE SLES package) must be installed before trying to build GCC.
 
 Assuming that your operating system's libraries are inadequate for compiling GCC 4.8.5, the following libraries would be installed in this order:
 
