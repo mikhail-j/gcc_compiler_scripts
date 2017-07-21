@@ -44,7 +44,7 @@ if test $found_curl_exit_code -ne 0; then
 elif test $found_md5sum_exit_code -ne 0; then
 	echo "error: md5sum could not be found!"
 	echo $found_md5sum_exit_code
-if test $found_git_exit_code -ne 0; then
+elif test $found_git_exit_code -ne 0; then
 	echo "error: git could not be found!"
 	exit $found_git_exit_code
 fi
@@ -146,6 +146,10 @@ if test $? -ne 0; then
 fi
 
 # Install yum-metadata-parser
+if test -d yum-metadata-parser; then
+	rm -rf yum-metadata-parser
+fi
+
 git clone https://github.com/rpm-software-management/yum-metadata-parser
 if test $? -ne 0; then
 	error_exit_code=$?
@@ -170,9 +174,14 @@ if test $? -ne 0; then
 	error_exit_code=$?
 	echo "error: yum-meta-data-parser failed to install properly!"
 	exit $error_exit_code
+fi
 
 cd ../
 
+# Install yum-utils
+if test -d yum-utils; then
+	rm -rf yum-utils
+fi
 git clone https://github.com/rpm-software-management/yum-utils
 if test $? -ne 0; then
 	error_exit_code=$?
@@ -187,15 +196,13 @@ else
 	exit 1
 fi
 
-make
+make -j 8
 if test $? -ne 0; then
 	exit $?
 fi
 
 sudo make install
 if test $? -ne 0; then
-	exit $?
-else
 	error_exit_code=$?
 	echo "error: yum-utils failed to install properly!"
 	exit $error_exit_code

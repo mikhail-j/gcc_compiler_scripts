@@ -67,7 +67,7 @@ else
 	exit 1
 fi
 
-sudo python setup.py install
+sudo python setup.py install --force
 if test $? -ne 0; then
 	error_exit_code=$?
 	echo "error: nose-1.3.7 failed to install properly!"
